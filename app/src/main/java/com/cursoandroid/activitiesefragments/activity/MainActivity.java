@@ -12,54 +12,49 @@ import android.widget.Toast;
 import com.cursoandroid.activitiesefragments.R;
 import com.cursoandroid.activitiesefragments.fragment.ContatosFragment;
 import com.cursoandroid.activitiesefragments.fragment.ConversasFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonConversa, buttonContato;
-    private ConversasFragment conversasFragment;
-    private ContatosFragment contatosFragment;
+    private Button buttonAbrir;
+    private Button buttonFechar;
+
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonContato = findViewById(R.id.buttonContato);
-        buttonConversa = findViewById(R.id.buttonConversa);
+        buttonAbrir = findViewById(R.id.buttonAbrir);
+        buttonFechar = findViewById(R.id.buttonFechar);
 
-        //Remover sombra da ActionBar
-        getSupportActionBar().setElevation(0);
-
-        conversasFragment = new ConversasFragment();
-
-        //Configurar objeto ara o Fragmento
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameConteudo, conversasFragment);
-        transaction.commit();
-
-        buttonContato.setOnClickListener(new View.OnClickListener() {
+        buttonAbrir.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                contatosFragment = new ContatosFragment();
+                Snackbar.make(view, "Botão precionado", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Confirmar", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                    //buttonAbrir.setText("Botão abrir alterado!");
+                            }
+                        })
+                        .setActionTextColor( getResources().getColor(R.color.purple_200) )
+                        .show();
 
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frameConteudo, contatosFragment);
-                transaction.commit();
 
             }
         });
 
-        buttonConversa.setOnClickListener(new View.OnClickListener() {
+        /*
+        buttonFechar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                conversasFragment = new ConversasFragment();
-
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frameConteudo, conversasFragment);
-                transaction.commit();
+                snackbar.dismiss();
             }
         });
+         */
 
     }
 
